@@ -16,11 +16,11 @@ jobs:
       - name: Set up Node.js Runtime
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20 # <-- Updated to match Playwright specifications
           cache: 'npm'
 
       - name: Install Dependencies
-        run: npm install # <-- Changed from 'npm ci' to force dynamic package matching
+        run: npm install
 
       - name: Install Playwright Browsers and OS Packages
         run: npx playwright install --with-deps
