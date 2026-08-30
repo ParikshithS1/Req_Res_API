@@ -1,0 +1,17 @@
+{
+  "name": "reqres_automation_updated",
+  "version": "1.0.0",
+  "description": "Playwright POM Automation Framework for ReqRes Header Feature",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:report": "playwright show-report",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:sanity": "playwright test --grep @sanity",
+    "test:regression": "playwright test --grep @regression"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0"
+  }
+}

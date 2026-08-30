@@ -1,0 +1,37 @@
+name: Playwright Tests
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js Runtime
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+        cache: 'npm' # <-- Adds rapid package caching for much faster runner build runs
+
+    - name: Install Dependencies
+      run: npm ci
+
+    - name: Install Playwright Browsers and OS Packages
+      run: npx playwright install --with-deps
+
+    - name: Run Playwright Regression Tests
+      run: npm run test:regression # <-- Targets your dedicated regression test script package config
+
+    - name: Upload Execution Report Artifacts
+      uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }} # <-- Ensures test logs drop down even if validation sweeps catch code breaks
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30
