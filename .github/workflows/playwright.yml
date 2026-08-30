@@ -20,7 +20,7 @@ jobs:
           cache: 'npm'
 
       - name: Install Dependencies
-        run: npm ci
+        run: npm install # <-- Changed from 'npm ci' to force dynamic package matching
 
       - name: Install Playwright Browsers and OS Packages
         run: npx playwright install --with-deps
